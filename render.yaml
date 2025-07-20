@@ -1,0 +1,32 @@
+services:
+  - type: web
+    name: odoo-app
+    env: docker
+    plan: free
+    autoDeploy: true
+    dockerContext: .
+    dockerfilePath: ./Dockerfile
+    ports:
+      - port: 8069
+    envVars:
+      - key: HOST
+        value: db
+      - key: USER
+        value: odoo
+      - key: PASSWORD
+        value: odoo
+
+  - type: privateService
+    name: odoo-db
+    env: docker
+    plan: free
+    autoDeploy: true
+    dockerContext: .
+    dockerfilePath: ./Dockerfile-db
+    envVars:
+      - key: POSTGRES_DB
+        value: postgres
+      - key: POSTGRES_USER
+        value: odoo
+      - key: POSTGRES_PASSWORD
+        value: odoo
