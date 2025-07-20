@@ -1,8 +1,10 @@
 FROM odoo:17
 
-# Copier les modules si tu en as
-COPY ./addons /mnt/extra-addons
+# Créer le dossier pour les modules
+RUN mkdir -p /mnt/extra-addons
+
+# Copier uniquement le dossier qui existe
 COPY ./custom_addons /mnt/extra-addons
 
-# Copier la configuration
+# Copier la config Odoo (si elle existe déjà)
 COPY ./config/odoo.conf /etc/odoo/odoo.conf
