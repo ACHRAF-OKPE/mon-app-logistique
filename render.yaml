@@ -25,7 +25,11 @@ services:
         fromDatabase:
           name: odoo-db
           property: port
-
-databases:
-  - name: odoo-db
-    plan: free
+    startCommand: >
+      odoo --db_host=$HOST
+           --db_port=$PGPORT
+           --db_user=$USER
+           --db_password=$PASSWORD
+           --addons-path=/mnt/extra-addons,/usr/lib/python3/dist-packages/odoo/addons
+           --xmlrpc-port=10000
+           --admin-passwd=pu1ss4nce7
